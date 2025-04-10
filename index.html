@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Clicker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            box-shadow: 0 0 20px rgba(78, 204, 163, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="src/styles/main.css">
+
+    <!-- Note: GitHub Pages is a static site hosting service and doesn't support server-side 
+         functionality like npm installations. All npm packages must be bundled or included 
+         via CDN for GitHub Pages deployment. -->
+</head>
+
+<body>
+    <button id="dark-mode-toggle">🌙</button>
+    <div id="game-container"></div>
+
+    <!-- Load Phaser from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+
+    <!-- Load our game scripts -->
+    <script src="src/js/scenes/BootScene.js"></script>
+    <script src="src/js/scenes/PreloadScene.js"></script>
+    <script src="src/js/scenes/MenuScene.js"></script>
+    <script src="src/js/scenes/GameScene.js"></script>
+    <script src="src/js/game.js"></script>
+    <script src="src/js/dark-mode.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+body.light-mode {
+    background: #f0f0f0;
+    color: #333;
+}
+
+body.light-mode #splash-screen {
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+}
+
+body.light-mode .header,
+body.light-mode .upgrades {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+body.light-mode #game-area {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.light-mode .upgrade {
+    background: #2c3e50;
+    color: #fff;
+}
+
+body.light-mode #start-game {
+    background: #2c3e50;
+    color: #fff;
+}
+
+body.light-mode #splash-screen h1,
+body.light-mode .upgrades h2 {
+    color: #2c3e50;
+} 
