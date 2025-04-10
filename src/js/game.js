@@ -1,3 +1,35 @@
+// Game configuration
+const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 650,
+    parent: 'game-container',
+    backgroundColor: '#1a1a2e',
+    scene: [BootScene, PreloadScene, MenuScene, GameScene],
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 },
+            debug: false
+        }
+    },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    }
+};
+
+// Create the game instance
+const game = new Phaser.Game(config);
+
+// Global game settings
+window.gameSettings = {
+    resources: 0,
+    clickPower: 1,
+    autoCollectors: 0,
+    darkMode: true
+};
+
 class SpaceClicker {
     constructor() {
         this.resources = 0;
@@ -19,22 +51,61 @@ class SpaceClicker {
     }
 
     init() {
-        this.startButton.addEventListener('click', () => this.startGame());
+        this.startButton.addEventListener('click', () => {
+            console.log('Start button clicked');
+            this.startGame();
+        });
+
         this.upgrades.forEach(upgrade => {
             upgrade.addEventListener('click', () => this.purchaseUpgrade(upgrade));
         });
 
         // Auto-collector interval
         setInterval(() => this.autoCollect(), 1000);
+
+        // Debug game area on load
+        this.debugGameArea();
+
+        // Log that initialization is complete
+        console.log('Game initialized');
+    }
+
+    debugGameArea() {
+        console.log('Game area dimensions:', {
+            clientWidth: this.gameArea.clientWidth,
+            clientHeight: this.gameArea.clientHeight,
+            offsetWidth: this.gameArea.offsetWidth,
+            offsetHeight: this.gameArea.offsetHeight,
+            getBoundingClientRect: this.gameArea.getBoundingClientRect()
+        });
+
+        // Add a visible border for debugging
+        this.gameArea.style.border = '2px solid red';
+
+        // Force a minimum size if needed
+        if (this.gameArea.clientHeight < 100) {
+            this.gameArea.style.minHeight = '300px';
+            console.log('Forced minimum height on game area');
+        }
     }
 
     startGame() {
+        console.log('Starting game');
+
+        // Hide splash screen and show game screen
         this.splashScreen.classList.remove('active');
         this.gameScreen.classList.add('active');
-        this.spawnObjects();
+
+        // Debug game area after screen change
+        setTimeout(() => {
+            this.debugGameArea();
+            this.spawnObjects();
+            console.log('Game started, objects spawned');
+        }, 100);
     }
 
     spawnObjects() {
+        console.log('Spawning objects');
         const numObjects = 5;
         for (let i = 0; i < numObjects; i++) {
             this.createSpaceObject();
@@ -46,14 +117,26 @@ class SpaceClicker {
         object.className = 'space-object';
         object.textContent = this.spaceObjects[Math.floor(Math.random() * this.spaceObjects.length)];
 
-        // Random position
-        const x = Math.random() * (this.gameArea.clientWidth - 50);
-        const y = Math.random() * (this.gameArea.clientHeight - 50);
+        // Set a fixed size for the objects
+        object.style.width = '50px';
+        object.style.height = '50px';
+        object.style.fontSize = '30px';
+        object.style.display = 'flex';
+        object.style.alignItems = 'center';
+        object.style.justifyContent = 'center';
+
+        // Random position within the visible game area
+        const gameAreaRect = this.gameArea.getBoundingClientRect();
+        const x = Math.random() * (gameAreaRect.width - 50);
+        const y = Math.random() * (gameAreaRect.height - 50);
         object.style.left = `${x}px`;
         object.style.top = `${y}px`;
 
         object.addEventListener('click', () => this.collectResource(object));
         this.gameArea.appendChild(object);
+
+        // Debug log to verify object creation
+        console.log('Created space object at position:', x, y);
     }
 
     collectResource(object) {
@@ -121,5 +204,6 @@ class SpaceClicker {
 
 // Initialize game when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing game');
     new SpaceClicker();
 }); 

@@ -5,43 +5,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Clicker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            box-shadow: 0 0 20px rgba(78, 204, 163, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+    <!-- External CSS -->
     <link rel="stylesheet" href="src/styles/main.css">
-    <link rel="stylesheet" href="src/styles/dark-mode.css">
+
+    <!-- Note: GitHub Pages is a static site hosting service and doesn't support server-side 
+         functionality like npm installations. All npm packages must be bundled or included 
+         via CDN for GitHub Pages deployment. -->
 </head>
 
 <body>
-    <div id="splash-screen" class="screen active">
-        <h1>Space Clicker</h1>
-        <p>Click space objects to collect resources and upgrade your collection abilities!</p>
-        <button id="start-game">Start Game</button>
-    </div>
+    <button id="dark-mode-toggle">🌙</button>
+    <div id="game-container"></div>
 
-    <div id="game-screen" class="screen">
-        <div class="header">
-            <div class="resources">
-                <span>Resources: <span id="resource-count">0</span></span>
-                <span>Per Click: <span id="per-click">1</span></span>
-            </div>
-            <button id="dark-mode-toggle">🌙</button>
-        </div>
+    <!-- Load Phaser from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
 
-        <div id="game-area">
-            <!-- Space objects will be dynamically added here -->
-        </div>
-
-        <div class="upgrades">
-            <h2>Upgrades</h2>
-            <div class="upgrade-list">
-                <button class="upgrade" data-cost="10" data-effect="click-power">
-                    Upgrade Click Power (10 resources)
-                </button>
-                <button class="upgrade" data-cost="50" data-effect="auto-collect">
-                    Auto Collector (50 resources)
-                </button>
-            </div>
-        </div>
-    </div>
-
+    <!-- Load our game scripts -->
+    <script src="src/js/scenes/BootScene.js"></script>
+    <script src="src/js/scenes/PreloadScene.js"></script>
+    <script src="src/js/scenes/MenuScene.js"></script>
+    <script src="src/js/scenes/GameScene.js"></script>
     <script src="src/js/game.js"></script>
     <script src="src/js/dark-mode.js"></script>
 </body>
