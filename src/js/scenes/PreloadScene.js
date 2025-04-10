@@ -43,7 +43,7 @@ class PreloadScene extends Phaser.Scene {
     }
 
     create() {
-        // Transition to the menu scene
-        this.scene.start('MenuScene');
+        // Transition directly to the game scene
+        this.scene.start('GameScene');
     }
 } 
