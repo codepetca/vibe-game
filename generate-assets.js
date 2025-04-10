@@ -11,18 +11,18 @@ if (!fs.existsSync(assetsDir)) {
 const assets = [
     {
         name: 'space-bg',
-        svg: `<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+        svg: `<svg width="1200" height="700" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <filter id="blur">
       <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
     </filter>
   </defs>
-  <rect width="800" height="600" fill="#1a1a2e"/>
-  <circle cx="200" cy="150" r="80" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
-  <circle cx="600" cy="450" r="100" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
-  <circle cx="400" cy="300" r="120" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
-  <circle cx="150" cy="400" r="60" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
-  <circle cx="650" cy="200" r="70" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
+  <rect width="1200" height="700" fill="#1a1a2e"/>
+  <circle cx="600" cy="175" r="120" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="900" cy="525" r="150" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="700" cy="350" r="180" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="500" cy="525" r="90" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
+  <circle cx="800" cy="175" r="105" fill="#4ecca3" opacity="0.1" filter="url(#blur)"/>
 </svg>`
     },
     {
@@ -55,8 +55,8 @@ const assets = [
     },
     {
         name: 'upgrade',
-        svg: `<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg">
-  <rect x="10" y="10" width="180" height="80" rx="10" fill="transparent" stroke="#4ecca3" stroke-width="4"/>
+        svg: `<svg width="300" height="100" xmlns="http://www.w3.org/2000/svg">
+  <rect x="10" y="10" width="280" height="80" rx="10" fill="transparent" stroke="#4ecca3" stroke-width="4"/>
 </svg>`
     },
     {

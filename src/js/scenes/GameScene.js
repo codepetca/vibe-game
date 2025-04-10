@@ -5,7 +5,7 @@ class GameScene extends Phaser.Scene {
 
     create() {
         // Add background
-        this.add.image(400, 300, 'background');
+        this.add.image(600, 350, 'background');
 
         // Initialize game variables
         this.resources = 0;
@@ -15,11 +15,8 @@ class GameScene extends Phaser.Scene {
         this.lastSpawnTime = 0;
         this.spawnInterval = 2000; // 2 seconds
 
-        // Add UI elements
-        this.createUI();
-
-        // Add upgrade buttons
-        this.createUpgrades();
+        // Create the navigation bar
+        this.createNavBar();
 
         // Spawn initial objects
         this.spawnObjects(5);
@@ -41,119 +38,181 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    createUI() {
-        // Add resource counter
-        this.resourceText = this.add.text(20, 20, 'Resources: 0', {
-            font: '24px Arial',
-            fill: '#ffffff'
-        });
+    createNavBar() {
+        // Create the navigation bar container
+        this.navBar = this.add.container(0, 0);
 
-        // Add per click counter
-        this.perClickText = this.add.text(20, 60, 'Per Click: 1', {
-            font: '24px Arial',
-            fill: '#ffffff'
-        });
+        // Create the navigation bar background
+        const navBarBg = this.add.rectangle(150, 350, 300, 700, 0x1a1a2e, 0.8);
+        navBarBg.setStrokeStyle(2, 0x4ecca3);
+        this.navBar.add(navBarBg);
 
-        // Add auto collector counter
-        this.autoCollectorText = this.add.text(20, 100, 'Auto Collectors: 0', {
-            font: '24px Arial',
-            fill: '#ffffff'
-        });
+        // Create the stats section
+        this.createStatsSection();
+
+        // Create the upgrades section
+        this.createUpgradesSection();
+
+        // Add the navigation bar to the scene
+        this.add.existing(this.navBar);
     }
 
-    createUpgrades() {
-        // Create upgrade container
-        const upgradeContainer = this.add.container(400, 550);
+    createStatsSection() {
+        // Create stats container with fixed width
+        const statsContainer = this.add.container(0, 0);
+        const statsWidth = 260; // Fixed width for stats container
 
-        // Add upgrade title
-        const upgradeTitle = this.add.text(0, -30, 'UPGRADES', {
-            font: 'bold 24px Arial',
+        // Add stats title
+        const statsTitle = this.add.text(20, 30, 'STATS', {
+            font: 'bold 20px Arial',
             fill: '#4ecca3'
         });
-        upgradeTitle.setOrigin(0.5);
-        upgradeContainer.add(upgradeTitle);
+        statsContainer.add(statsTitle);
 
-        // Create click power upgrade
-        const clickPowerUpgrade = this.add.image(-150, 0, 'upgrade');
-        clickPowerUpgrade.setScale(0.3);
+        // Add resource counter
+        this.resourceText = this.add.text(20, 70, 'Resources: 0', {
+            font: '18px Arial',
+            fill: '#ffffff',
+            wordWrap: { width: statsWidth - 40 } // Ensure text wraps within container
+        });
+        statsContainer.add(this.resourceText);
+
+        // Add per click counter
+        this.perClickText = this.add.text(20, 100, 'Per Click: 1', {
+            font: '18px Arial',
+            fill: '#ffffff',
+            wordWrap: { width: statsWidth - 40 } // Ensure text wraps within container
+        });
+        statsContainer.add(this.perClickText);
+
+        // Add auto collector counter
+        this.autoCollectorText = this.add.text(20, 130, 'Auto Collectors: 0', {
+            font: '18px Arial',
+            fill: '#ffffff',
+            wordWrap: { width: statsWidth - 40 } // Ensure text wraps within container
+        });
+        statsContainer.add(this.autoCollectorText);
+
+        // Add stats container to nav bar
+        this.navBar.add(statsContainer);
+    }
+
+    createUpgradesSection() {
+        // Create upgrades container with fixed width
+        const upgradesContainer = this.add.container(0, 0);
+        const upgradesWidth = 260; // Fixed width for upgrades container
+
+        // Add upgrade title
+        const upgradeTitle = this.add.text(20, 180, 'UPGRADES', {
+            font: 'bold 20px Arial',
+            fill: '#4ecca3'
+        });
+        upgradesContainer.add(upgradeTitle);
+
+        // Create click power upgrade - make it wider
+        const clickPowerUpgrade = this.add.image(150, 250, 'upgrade');
+        clickPowerUpgrade.setScale(0.3, 0.3); // Keep height the same
+        clickPowerUpgrade.setDisplaySize(200, clickPowerUpgrade.height); // Make it wider
         clickPowerUpgrade.setInteractive();
+        upgradesContainer.add(clickPowerUpgrade);
 
         // Add clear text labels for click power upgrade
-        const clickPowerTitle = this.add.text(-150, -50, 'CLICK POWER', {
+        const clickPowerTitle = this.add.text(150, 250, 'Click Power 1', {
             font: 'bold 16px Arial',
             fill: '#ffffff',
-            align: 'center'
+            align: 'center',
+            wordWrap: { width: 180 } // Wider text area
         });
-        clickPowerTitle.setOrigin(0.5);
+        clickPowerTitle.setOrigin(0.5, 0.5); // Center the text
+        upgradesContainer.add(clickPowerTitle);
 
-        const clickPowerDesc = this.add.text(-150, 0, 'Double your click power\nCost: 10 resources', {
-            font: '14px Arial',
-            fill: '#ffffff',
-            align: 'center'
-        });
-        clickPowerDesc.setOrigin(0.5);
-
-        const clickPowerLevel = this.add.text(-150, 50, 'Level: 1', {
-            font: '14px Arial',
-            fill: '#4ecca3',
-            align: 'center'
-        });
-        clickPowerLevel.setOrigin(0.5);
-
-        // Create auto collector upgrade
-        const autoCollectorUpgrade = this.add.image(150, 0, 'upgrade');
-        autoCollectorUpgrade.setScale(0.3);
+        // Create auto collector upgrade - make it wider
+        const autoCollectorUpgrade = this.add.image(150, 350, 'upgrade');
+        autoCollectorUpgrade.setScale(0.3, 0.3); // Keep height the same
+        autoCollectorUpgrade.setDisplaySize(200, autoCollectorUpgrade.height); // Make it wider
         autoCollectorUpgrade.setInteractive();
+        upgradesContainer.add(autoCollectorUpgrade);
 
         // Add clear text labels for auto collector upgrade
-        const autoCollectorTitle = this.add.text(150, -50, 'AUTO COLLECTOR', {
+        const autoCollectorTitle = this.add.text(150, 350, 'Auto Collector 0', {
             font: 'bold 16px Arial',
             fill: '#ffffff',
-            align: 'center'
+            align: 'center',
+            wordWrap: { width: 180 } // Wider text area
         });
-        autoCollectorTitle.setOrigin(0.5);
+        autoCollectorTitle.setOrigin(0.5, 0.5); // Center the text
+        upgradesContainer.add(autoCollectorTitle);
 
-        const autoCollectorDesc = this.add.text(150, 0, 'Automatically collect resources\nCost: 50 resources', {
+        // Create tooltips (hidden by default)
+        const clickPowerTooltip = this.add.text(20, 290, 'Double your click power\nCost: 10 resources', {
             font: '14px Arial',
             fill: '#ffffff',
-            align: 'center'
+            align: 'left',
+            backgroundColor: '#1a1a2e',
+            padding: { x: 10, y: 5 },
+            wordWrap: { width: upgradesWidth - 40 } // Ensure text wraps within container
         });
-        autoCollectorDesc.setOrigin(0.5);
+        clickPowerTooltip.setOrigin(0, 0.5);
+        clickPowerTooltip.setVisible(false);
+        upgradesContainer.add(clickPowerTooltip);
 
-        const autoCollectorLevel = this.add.text(150, 50, 'Level: 0', {
+        const autoCollectorTooltip = this.add.text(20, 390, 'Automatically collect resources\nCost: 50 resources', {
             font: '14px Arial',
-            fill: '#4ecca3',
-            align: 'center'
+            fill: '#ffffff',
+            align: 'left',
+            backgroundColor: '#1a1a2e',
+            padding: { x: 10, y: 5 },
+            wordWrap: { width: upgradesWidth - 40 } // Ensure text wraps within container
         });
-        autoCollectorLevel.setOrigin(0.5);
+        autoCollectorTooltip.setOrigin(0, 0.5);
+        autoCollectorTooltip.setVisible(false);
+        upgradesContainer.add(autoCollectorTooltip);
+
+        // Store original display sizes for hover effects
+        const clickPowerOriginalWidth = clickPowerUpgrade.displayWidth;
+        const clickPowerOriginalHeight = clickPowerUpgrade.displayHeight;
+        const autoCollectorOriginalWidth = autoCollectorUpgrade.displayWidth;
+        const autoCollectorOriginalHeight = autoCollectorUpgrade.displayHeight;
 
         // Add hover effects
         clickPowerUpgrade.on('pointerover', () => {
-            clickPowerUpgrade.setScale(0.35);
+            // Increase size while maintaining width
+            clickPowerUpgrade.setDisplaySize(
+                clickPowerOriginalWidth * 1.1,
+                clickPowerOriginalHeight * 1.1
+            );
             clickPowerTitle.setScale(1.05);
-            clickPowerDesc.setScale(1.05);
-            clickPowerLevel.setScale(1.05);
+            clickPowerTooltip.setVisible(true);
         });
 
         clickPowerUpgrade.on('pointerout', () => {
-            clickPowerUpgrade.setScale(0.3);
+            // Restore original size
+            clickPowerUpgrade.setDisplaySize(
+                clickPowerOriginalWidth,
+                clickPowerOriginalHeight
+            );
             clickPowerTitle.setScale(1);
-            clickPowerDesc.setScale(1);
-            clickPowerLevel.setScale(1);
+            clickPowerTooltip.setVisible(false);
         });
 
         autoCollectorUpgrade.on('pointerover', () => {
-            autoCollectorUpgrade.setScale(0.35);
+            // Increase size while maintaining width
+            autoCollectorUpgrade.setDisplaySize(
+                autoCollectorOriginalWidth * 1.1,
+                autoCollectorOriginalHeight * 1.1
+            );
             autoCollectorTitle.setScale(1.05);
-            autoCollectorDesc.setScale(1.05);
-            autoCollectorLevel.setScale(1.05);
+            autoCollectorTooltip.setVisible(true);
         });
 
         autoCollectorUpgrade.on('pointerout', () => {
-            autoCollectorUpgrade.setScale(0.3);
+            // Restore original size
+            autoCollectorUpgrade.setDisplaySize(
+                autoCollectorOriginalWidth,
+                autoCollectorOriginalHeight
+            );
             autoCollectorTitle.setScale(1);
-            autoCollectorDesc.setScale(1);
-            autoCollectorLevel.setScale(1);
+            autoCollectorTooltip.setVisible(false);
         });
 
         // Add click handlers with visual feedback
@@ -165,7 +224,7 @@ class GameScene extends Phaser.Scene {
                 duration: 100,
                 yoyo: true,
                 onComplete: () => {
-                    this.purchaseUpgrade('click-power', 10, clickPowerDesc, clickPowerLevel);
+                    this.purchaseUpgrade('click-power', 10, clickPowerTooltip, clickPowerTitle);
                 }
             });
         });
@@ -178,16 +237,13 @@ class GameScene extends Phaser.Scene {
                 duration: 100,
                 yoyo: true,
                 onComplete: () => {
-                    this.purchaseUpgrade('auto-collect', 50, autoCollectorDesc, autoCollectorLevel);
+                    this.purchaseUpgrade('auto-collect', 50, autoCollectorTooltip, autoCollectorTitle);
                 }
             });
         });
 
-        // Add all elements to the container
-        upgradeContainer.add([
-            clickPowerUpgrade, clickPowerTitle, clickPowerDesc, clickPowerLevel,
-            autoCollectorUpgrade, autoCollectorTitle, autoCollectorDesc, autoCollectorLevel
-        ]);
+        // Add upgrades container to nav bar
+        this.navBar.add(upgradesContainer);
     }
 
     spawnObjects(count) {
@@ -197,8 +253,8 @@ class GameScene extends Phaser.Scene {
             const type = objectTypes[Phaser.Math.Between(0, objectTypes.length - 1)];
 
             // Create object
-            const x = Phaser.Math.Between(100, 700);
-            const y = Phaser.Math.Between(100, 500);
+            const x = Phaser.Math.Between(400, 1000); // Adjusted spawn area to avoid nav bar
+            const y = Phaser.Math.Between(100, 600);
             const object = this.add.image(x, y, type);
 
             // Set random scale
@@ -250,7 +306,7 @@ class GameScene extends Phaser.Scene {
         }
     }
 
-    purchaseUpgrade(type, cost, descText, levelText) {
+    purchaseUpgrade(type, cost, tooltipText, titleText) {
         if (this.resources >= cost) {
             // Deduct cost
             this.resources -= cost;
@@ -259,13 +315,13 @@ class GameScene extends Phaser.Scene {
             switch (type) {
                 case 'click-power':
                     this.clickPower *= 2;
-                    descText.setText(`Double your click power\nCost: ${cost * 2} resources`);
-                    levelText.setText(`Level: ${Math.log2(this.clickPower) + 1}`);
+                    tooltipText.setText(`Double your click power\nCost: ${cost * 2} resources`);
+                    titleText.setText(`Click Power ${Math.log2(this.clickPower) + 1}`);
                     break;
                 case 'auto-collect':
                     this.autoCollectors++;
-                    descText.setText(`Automatically collect resources\nCost: ${cost * 2} resources`);
-                    levelText.setText(`Level: ${this.autoCollectors}`);
+                    tooltipText.setText(`Automatically collect resources\nCost: ${cost * 2} resources`);
+                    titleText.setText(`Auto Collector ${this.autoCollectors}`);
                     break;
             }
 

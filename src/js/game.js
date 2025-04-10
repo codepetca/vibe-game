@@ -1,8 +1,8 @@
 // Game configuration
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 650,
+    width: window.innerWidth,
+    height: window.innerHeight,
     parent: 'game-container',
     backgroundColor: '#1a1a2e',
     scene: [BootScene, PreloadScene, MenuScene, GameScene],
@@ -14,7 +14,7 @@ const config = {
         }
     },
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH
     }
 };
