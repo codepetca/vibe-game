@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #1a1a2e;
+    color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.screen.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#splash-screen {
+    text-align: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+#splash-screen h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #4ecca3;
+}
+
+#start-game {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: #4ecca3;
+    border: none;
+    border-radius: 5px;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#start-game:hover {
+    transform: scale(1.05);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.resources {
+    display: flex;
+    gap: 20px;
+    font-size: 1.2em;
+}
+
+#dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    padding: 5px;
+}
+
+#game-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.space-object {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.space-object:hover {
+    transform: scale(1.1);
+}
+
+.upgrades {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.upgrades h2 {
+    margin-bottom: 15px;
+    color: #4ecca3;
+}
+
+.upgrade-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.upgrade {
+    padding: 10px 20px;
+    background: #4ecca3;
+    border: none;
+    border-radius: 5px;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.upgrade:hover {
+    transform: scale(1.05);
+}
+
+.upgrade:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+} 

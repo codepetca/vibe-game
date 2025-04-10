@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Clicker</title>
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/dark-mode.css">
+</head>
+
+<body>
+    <div id="splash-screen" class="screen active">
+        <h1>Space Clicker</h1>
+        <p>Click space objects to collect resources and upgrade your collection abilities!</p>
+        <button id="start-game">Start Game</button>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div class="header">
+            <div class="resources">
+                <span>Resources: <span id="resource-count">0</span></span>
+                <span>Per Click: <span id="per-click">1</span></span>
+            </div>
+            <button id="dark-mode-toggle">🌙</button>
+        </div>
+
+        <div id="game-area">
+            <!-- Space objects will be dynamically added here -->
+        </div>
+
+        <div class="upgrades">
+            <h2>Upgrades</h2>
+            <div class="upgrade-list">
+                <button class="upgrade" data-cost="10" data-effect="click-power">
+                    Upgrade Click Power (10 resources)
+                </button>
+                <button class="upgrade" data-cost="50" data-effect="auto-collect">
+                    Auto Collector (50 resources)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/js/game.js"></script>
+    <script src="src/js/dark-mode.js"></script>
+</body>
+
+</html>
