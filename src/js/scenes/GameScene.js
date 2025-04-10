@@ -143,36 +143,15 @@ class GameScene extends Phaser.Scene {
         autoCollectorTitle.setOrigin(0.5, 0.5); // Center the text
         upgradesContainer.add(autoCollectorTitle);
 
-        // Create tooltips (hidden by default)
-        const clickPowerTooltip = this.add.text(20, 290, 'Double your click power\nCost: 10 resources', {
-            font: '14px Arial',
-            fill: '#ffffff',
-            align: 'left',
-            backgroundColor: '#1a1a2e',
-            padding: { x: 10, y: 5 },
-            wordWrap: { width: upgradesWidth - 40 } // Ensure text wraps within container
-        });
-        clickPowerTooltip.setOrigin(0, 0.5);
-        clickPowerTooltip.setVisible(false);
-        upgradesContainer.add(clickPowerTooltip);
-
-        const autoCollectorTooltip = this.add.text(20, 390, 'Automatically collect resources\nCost: 50 resources', {
-            font: '14px Arial',
-            fill: '#ffffff',
-            align: 'left',
-            backgroundColor: '#1a1a2e',
-            padding: { x: 10, y: 5 },
-            wordWrap: { width: upgradesWidth - 40 } // Ensure text wraps within container
-        });
-        autoCollectorTooltip.setOrigin(0, 0.5);
-        autoCollectorTooltip.setVisible(false);
-        upgradesContainer.add(autoCollectorTooltip);
-
         // Store original display sizes for hover effects
         const clickPowerOriginalWidth = clickPowerUpgrade.displayWidth;
         const clickPowerOriginalHeight = clickPowerUpgrade.displayHeight;
         const autoCollectorOriginalWidth = autoCollectorUpgrade.displayWidth;
         const autoCollectorOriginalHeight = autoCollectorUpgrade.displayHeight;
+
+        // Store original text for each button as properties of the scene
+        this.clickPowerOriginalText = 'Click Power 1';
+        this.autoCollectorOriginalText = 'Auto Collector 0';
 
         // Add hover effects
         clickPowerUpgrade.on('pointerover', () => {
@@ -182,7 +161,10 @@ class GameScene extends Phaser.Scene {
                 clickPowerOriginalHeight * 1.1
             );
             clickPowerTitle.setScale(1.05);
-            clickPowerTooltip.setVisible(true);
+
+            // Replace button text with tooltip
+            clickPowerTitle.setText('Double your click power\nCost: 10 resources');
+            clickPowerTitle.setFontSize(14); // Smaller font for tooltip
         });
 
         clickPowerUpgrade.on('pointerout', () => {
@@ -192,7 +174,10 @@ class GameScene extends Phaser.Scene {
                 clickPowerOriginalHeight
             );
             clickPowerTitle.setScale(1);
-            clickPowerTooltip.setVisible(false);
+
+            // Restore original button text
+            clickPowerTitle.setText(this.clickPowerOriginalText);
+            clickPowerTitle.setFontSize(16); // Restore original font size
         });
 
         autoCollectorUpgrade.on('pointerover', () => {
@@ -202,7 +187,10 @@ class GameScene extends Phaser.Scene {
                 autoCollectorOriginalHeight * 1.1
             );
             autoCollectorTitle.setScale(1.05);
-            autoCollectorTooltip.setVisible(true);
+
+            // Replace button text with tooltip
+            autoCollectorTitle.setText('Automatically collect resources\nCost: 50 resources');
+            autoCollectorTitle.setFontSize(14); // Smaller font for tooltip
         });
 
         autoCollectorUpgrade.on('pointerout', () => {
@@ -212,7 +200,10 @@ class GameScene extends Phaser.Scene {
                 autoCollectorOriginalHeight
             );
             autoCollectorTitle.setScale(1);
-            autoCollectorTooltip.setVisible(false);
+
+            // Restore original button text
+            autoCollectorTitle.setText(this.autoCollectorOriginalText);
+            autoCollectorTitle.setFontSize(16); // Restore original font size
         });
 
         // Add click handlers with visual feedback
@@ -224,7 +215,7 @@ class GameScene extends Phaser.Scene {
                 duration: 100,
                 yoyo: true,
                 onComplete: () => {
-                    this.purchaseUpgrade('click-power', 10, clickPowerTooltip, clickPowerTitle);
+                    this.purchaseUpgrade('click-power', 10, null, clickPowerTitle);
                 }
             });
         });
@@ -237,7 +228,7 @@ class GameScene extends Phaser.Scene {
                 duration: 100,
                 yoyo: true,
                 onComplete: () => {
-                    this.purchaseUpgrade('auto-collect', 50, autoCollectorTooltip, autoCollectorTitle);
+                    this.purchaseUpgrade('auto-collect', 50, null, autoCollectorTitle);
                 }
             });
         });
@@ -315,13 +306,15 @@ class GameScene extends Phaser.Scene {
             switch (type) {
                 case 'click-power':
                     this.clickPower *= 2;
-                    tooltipText.setText(`Double your click power\nCost: ${cost * 2} resources`);
-                    titleText.setText(`Click Power ${Math.log2(this.clickPower) + 1}`);
+                    const newClickPowerText = `Click Power ${Math.log2(this.clickPower) + 1}`;
+                    titleText.setText(newClickPowerText);
+                    this.clickPowerOriginalText = newClickPowerText; // Update the stored original text
                     break;
                 case 'auto-collect':
                     this.autoCollectors++;
-                    tooltipText.setText(`Automatically collect resources\nCost: ${cost * 2} resources`);
-                    titleText.setText(`Auto Collector ${this.autoCollectors}`);
+                    const newAutoCollectorText = `Auto Collector ${this.autoCollectors}`;
+                    titleText.setText(newAutoCollectorText);
+                    this.autoCollectorOriginalText = newAutoCollectorText; // Update the stored original text
                     break;
             }
 

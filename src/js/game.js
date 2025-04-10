@@ -5,7 +5,7 @@ const config = {
     height: window.innerHeight,
     parent: 'game-container',
     backgroundColor: '#1a1a2e',
-    scene: [BootScene, PreloadScene, MenuScene, GameScene],
+    scene: [BootScene, PreloadScene, GameScene],
     physics: {
         default: 'arcade',
         arcade: {
@@ -26,8 +26,7 @@ const game = new Phaser.Game(config);
 window.gameSettings = {
     resources: 0,
     clickPower: 1,
-    autoCollectors: 0,
-    darkMode: true
+    autoCollectors: 0
 };
 
 class SpaceClicker {
