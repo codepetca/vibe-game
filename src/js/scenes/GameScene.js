@@ -1,6 +1,7 @@
 class GameScene extends Phaser.Scene {
     constructor() {
         super('GameScene');
+        this.clickPowerIncrement = 1; // Track the current increment for click power
     }
 
     create() {
@@ -153,6 +154,11 @@ class GameScene extends Phaser.Scene {
         this.clickPowerOriginalText = 'Click Power 1';
         this.autoCollectorOriginalText = 'Auto Collector 0';
 
+        // Store upgrade costs
+        this.clickPowerCost = 15;
+        this.autoCollectorCost = 25; // Reduced from 100 to 25 for better early game accessibility
+        this.clickPowerIncrement = 1; // Initialize the increment
+
         // Add hover effects
         clickPowerUpgrade.on('pointerover', () => {
             // Increase size while maintaining width
@@ -163,7 +169,7 @@ class GameScene extends Phaser.Scene {
             clickPowerTitle.setScale(1.05);
 
             // Replace button text with tooltip
-            clickPowerTitle.setText('Double your click power\nCost: 10 resources');
+            clickPowerTitle.setText(`Increase click power by +${this.clickPowerIncrement}\nCost: ${this.clickPowerCost} resources`);
             clickPowerTitle.setFontSize(14); // Smaller font for tooltip
         });
 
@@ -189,7 +195,7 @@ class GameScene extends Phaser.Scene {
             autoCollectorTitle.setScale(1.05);
 
             // Replace button text with tooltip
-            autoCollectorTitle.setText('Automatically collect resources\nCost: 50 resources');
+            autoCollectorTitle.setText(`Automatically collect resources\nCost: ${this.autoCollectorCost} resources`);
             autoCollectorTitle.setFontSize(14); // Smaller font for tooltip
         });
 
@@ -215,7 +221,7 @@ class GameScene extends Phaser.Scene {
                 duration: 100,
                 yoyo: true,
                 onComplete: () => {
-                    this.purchaseUpgrade('click-power', 10, null, clickPowerTitle);
+                    this.purchaseUpgrade('click-power', this.clickPowerCost, null, clickPowerTitle);
                 }
             });
         });
@@ -228,7 +234,7 @@ class GameScene extends Phaser.Scene {
                 duration: 100,
                 yoyo: true,
                 onComplete: () => {
-                    this.purchaseUpgrade('auto-collect', 50, null, autoCollectorTitle);
+                    this.purchaseUpgrade('auto-collect', this.autoCollectorCost, null, autoCollectorTitle);
                 }
             });
         });
@@ -305,16 +311,26 @@ class GameScene extends Phaser.Scene {
             // Apply upgrade
             switch (type) {
                 case 'click-power':
-                    this.clickPower *= 2;
-                    const newClickPowerText = `Click Power ${Math.log2(this.clickPower) + 1}`;
+                    // Add the current increment to click power
+                    this.clickPower += this.clickPowerIncrement;
+                    // Increase the increment by 2 for next level
+                    this.clickPowerIncrement += 2;
+
+                    const newClickPowerText = `Click Power ${this.clickPower}`;
                     titleText.setText(newClickPowerText);
-                    this.clickPowerOriginalText = newClickPowerText; // Update the stored original text
+                    this.clickPowerOriginalText = newClickPowerText;
+
+                    // Increase cost for next upgrade (exponential scaling)
+                    this.clickPowerCost = Math.floor(this.clickPowerCost * 1.8);
                     break;
                 case 'auto-collect':
                     this.autoCollectors++;
                     const newAutoCollectorText = `Auto Collector ${this.autoCollectors}`;
                     titleText.setText(newAutoCollectorText);
-                    this.autoCollectorOriginalText = newAutoCollectorText; // Update the stored original text
+                    this.autoCollectorOriginalText = newAutoCollectorText;
+
+                    // Increase cost for next upgrade (1.5x scaling instead of 2x)
+                    this.autoCollectorCost = Math.floor(this.autoCollectorCost * 1.5);
                     break;
             }
 
