@@ -52,23 +52,28 @@
 
         .games-container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             gap: 2rem;
             padding: 2rem;
             max-width: 1200px;
+            width: 100%;
         }
 
         .game-card {
             background-color: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             padding: 1.5rem;
-            width: 300px;
+            width: 80%;
+            max-width: 600px;
             text-align: center;
             transition: transform 0.3s ease;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .game-card:hover {
@@ -78,6 +83,7 @@
 
         .game-card img {
             width: 100%;
+            max-width: 400px;
             height: 200px;
             object-fit: contain;
             margin-bottom: 1rem;
@@ -94,6 +100,26 @@
         .game-card p {
             margin: 1rem 0;
             color: #ffffff;
+        }
+
+        .coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .coming-soon-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffa726;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -113,6 +139,11 @@
             <h2>Space Clicker</h2>
             <p>Click meteors to collect resources and upgrade your space station!</p>
         </a>
+        <div class="game-card coming-soon">
+            <div class="coming-soon-text">Coming Soon</div>
+            <h2>Roguelike</h2>
+            <p>Explore dungeons, battle monsters, and collect treasure in this classic roguelike adventure!</p>
+        </div>
     </div>
 </body>
 
