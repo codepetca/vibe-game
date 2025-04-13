@@ -1,0 +1,129 @@
+/* Game-specific styles */
+.game-container {
+    position: relative;
+    width: 1200px;
+    height: 700px;
+    margin: 0 auto;
+}
+
+/* Navigation bar styles */
+.nav-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(26, 26, 46, 0.8);
+    border-right: 2px solid #4ecca3;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Stats section styles */
+.stats-section {
+    margin-bottom: 30px;
+}
+
+.stats-title {
+    color: #4ecca3;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.stats-item {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Upgrades section styles */
+.upgrades-section {
+    margin-top: 30px;
+}
+
+.upgrade-title {
+    color: #4ecca3;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.upgrade-button {
+    width: 100%;
+    height: 60px;
+    background-color: #16213e;
+    border: 2px solid #4ecca3;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.upgrade-button:hover {
+    background-color: #0f3460;
+    transform: scale(1.05);
+}
+
+.upgrade-button-text {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Game area styles */
+.game-area {
+    position: absolute;
+    left: 300px;
+    top: 0;
+    width: 900px;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Space object styles */
+.space-object {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.space-object:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .game-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 12/7;
+    }
+    
+    .nav-bar {
+        width: 25%;
+    }
+    
+    .game-area {
+        width: 75%;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-bar {
+        width: 30%;
+    }
+    
+    .game-area {
+        width: 70%;
+    }
+    
+    .stats-item, .upgrade-button-text {
+        font-size: 14px;
+    }
+} 

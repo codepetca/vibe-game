@@ -1,77 +1,64 @@
-# Space Clicker Game
+# Vibe Games
 
-A fun and addictive space-themed clicker game built with Phaser 3.
+A collection of fun, engaging browser games built with Phaser 3.
 
-## Features
+## Games
 
-- Simple and engaging gameplay
-- Resource collection mechanics
-- Upgrade system
-- Dark mode support
-- Responsive design
-- High score tracking
+### Space Clicker
+- A space-themed clicker game where you collect resources from celestial objects
+- Upgrade your click power and automate collection
+- Features a clean, modern UI with smooth animations
 
-## How to Play
+## Project Structure
 
-1. Click on space objects (planets, asteroids, stars) to collect resources
-2. Use collected resources to purchase upgrades:
-   - Upgrade Click Power: Increases resources collected per click
-   - Auto Collector: Automatically collects resources periodically
-3. Try to achieve the highest score possible!
+```
+vibe-game/
+├── public/                    # Static files for the main website
+│   ├── index.html            # Main landing page
+│   ├── styles/               # Global styles
+│   └── assets/               # Shared assets
+│
+├── games/                    # Individual game directories
+│   ├── space-clicker/       # Space Clicker game
+│   │   ├── src/
+│   │   │   ├── js/
+│   │   │   │   ├── scenes/
+│   │   │   │   └── game.js
+│   │   │   └── styles/
+│   │   ├── assets/
+│   │   └── index.html
+│   │
+│   └── [future-game]/       # Template for future games
+│
+└── README.md                 # Project documentation
+```
 
-## Setup and Installation
-
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm (v6 or higher)
-
-### Installation
+## Setup
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/space-clicker.git
-   cd space-clicker
-   ```
+```bash
+git clone https://github.com/yourusername/vibe-game.git
+cd vibe-game
+```
 
-2. Install dependencies and download game assets:
-   ```
-   npm run setup
-   ```
-
-3. Start the development server:
-   ```
-   npm start
-   ```
-
-4. Open your browser and navigate to `http://localhost:8080`
+2. Open the project in your browser:
+- For local development, you can use a simple HTTP server
+- For production, deploy to a static hosting service like GitHub Pages
 
 ## Development
 
-This game is built with Phaser 3, a popular HTML5 game framework. The project structure is as follows:
+Each game is self-contained in its own directory under `games/`. To add a new game:
 
-```
-/
-├── index.html              # Main HTML file
-├── package.json            # Project dependencies and scripts
-├── download-assets.js      # Script to download placeholder assets
-├── assets/                 # Game assets
-│   └── images/             # Image assets
-└── src/                    # Source code
-    └── js/                 # JavaScript files
-        ├── game.js         # Main game initialization
-        ├── dark-mode.js    # Dark mode functionality
-        └── scenes/         # Phaser scenes
-            ├── BootScene.js       # Initial loading scene
-            ├── PreloadScene.js    # Asset loading scene
-            ├── MenuScene.js       # Main menu scene
-            └── GameScene.js       # Main game scene
-```
+1. Create a new directory under `games/`
+2. Follow the structure of existing games
+3. Add a link to the game on the main landing page
 
-## Deployment
+## Technologies Used
 
-The game is configured for deployment on GitHub Pages. Simply push your changes to the main branch, and GitHub Actions will automatically deploy the game to the gh-pages branch.
+- Phaser 3 for game development
+- HTML5 and CSS3 for UI
+- JavaScript for game logic
 
 ## License
 
-MIT License
+MIT License - feel free to use this project as a template for your own games!
