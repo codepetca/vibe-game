@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Games</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #4ecca3;
+        }
+
+        .header p {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .game-card {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.3);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .game-card h2 {
+            margin: 0;
+            color: #4ecca3;
+            font-size: 1.5rem;
+        }
+
+        .game-card p {
+            margin: 1rem 0;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Vibe Games</h1>
+        <p>A collection of simple, fun games</p>
+    </div>
+
+    <div class="games-container">
+        <a href="games/space-clicker/index.html" class="game-card">
+            <img src="games/space-clicker/assets/images/Meteors/meteorGrey_big2.png" alt="Space Clicker">
+            <h2>Space Clicker</h2>
+            <p>Click meteors to collect resources and upgrade your space station!</p>
+        </a>
+    </div>
+</body>
+
+</html>
