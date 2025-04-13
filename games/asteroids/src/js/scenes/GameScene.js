@@ -6,23 +6,28 @@ class GameScene extends Phaser.Scene {
     create() {
         console.log('GameScene create started');
 
-        // Create a black background
-        this.add.rectangle(0, 0, 1200, 700, 0x000000)
-            .setOrigin(0, 0);
+        // Add background
+        this.add.image(0, 0, 'background')
+            .setOrigin(0, 0)
+            .setDisplaySize(1200, 700);
 
-        // Create the player ship (triangle)
-        this.ship = this.add.triangle(600, 350, 0, 20, 10, -10, -10, -10, 0x00ff00);
-        this.ship.setOrigin(0.5, 0.5);
+        // Create the player ship
+        this.ship = this.add.image(600, 350, 'ship');
+        this.ship.setScale(0.5); // Make ship smaller
         this.physics.add.existing(this.ship);
         this.ship.body.setCollideWorldBounds(true);
 
-        // Create some asteroids (circles)
+        // Create asteroids group
         this.asteroids = this.add.group();
         for (let i = 0; i < 5; i++) {
             const x = Phaser.Math.Between(100, 1100);
             const y = Phaser.Math.Between(100, 600);
-            const size = Phaser.Math.Between(20, 40);
-            const asteroid = this.add.circle(x, y, size, 0x808080);
+            const size = Phaser.Math.Between(0, 2);
+            const asteroid = this.add.image(x, y,
+                size === 0 ? 'asteroid_large' :
+                    size === 1 ? 'asteroid_medium' : 'asteroid_small'
+            );
+            asteroid.setScale(0.5);
             this.physics.add.existing(asteroid);
             asteroid.body.setVelocity(
                 Phaser.Math.Between(-100, 100),
@@ -71,12 +76,12 @@ class GameScene extends Phaser.Scene {
         // Handle shooting
         if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
             const angle = this.ship.rotation - Math.PI / 2;
-            const bullet = this.add.circle(
+            const bullet = this.add.image(
                 this.ship.x + Math.cos(angle) * 20,
                 this.ship.y + Math.sin(angle) * 20,
-                5,
-                0xffff00
+                'bullet'
             );
+            bullet.setRotation(angle + Math.PI / 2);
             this.physics.add.existing(bullet);
             bullet.body.setVelocity(
                 Math.cos(angle) * 400,

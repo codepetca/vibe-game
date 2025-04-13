@@ -16,8 +16,19 @@ class PreloadScene extends Phaser.Scene {
             console.error('Error details:', fileObj.error);
         });
 
-        // Skip loading assets for now since they don't exist
-        // We'll use simple shapes in the GameScene instead
+        // Load background
+        this.load.image('background', 'assets/images/Backgrounds/black.png');
+
+        // Load ship
+        this.load.image('ship', 'assets/images/Ships/playerShip3_blue.png');
+
+        // Load asteroids
+        this.load.image('asteroid_large', 'assets/images/Meteors/meteorGrey_big1.png');
+        this.load.image('asteroid_medium', 'assets/images/Meteors/meteorGrey_med1.png');
+        this.load.image('asteroid_small', 'assets/images/Meteors/meteorGrey_small1.png');
+
+        // Load bullets
+        this.load.image('bullet', 'assets/images/Lasers/laserBlue01.png');
 
         // Add progress bar
         const progressBar = this.add.graphics();
