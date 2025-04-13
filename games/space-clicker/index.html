@@ -4,32 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Clicker</title>
+    <title>Space Clicker - Codepet Games</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #1a1a2e;
+            background-color: #2a1a0a;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             font-family: Arial, sans-serif;
-            padding-top: 20px;
+        }
+
+        .game-frame {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 167, 38, 0.3);
+        }
+
+        .title-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 167, 38, 0.3);
+            position: relative;
+        }
+
+        .game-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffa726;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .game-logo {
+            width: 24px;
+            height: 24px;
+        }
+
+        .home-button {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .home-button:hover {
+            color: #ffa726;
+            background-color: rgba(255, 167, 38, 0.1);
+            transform: scale(1.1);
+        }
+
+        .paw-logo {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
         }
 
         #game-container {
-            box-shadow: 0 0 20px rgba(78, 204, 163, 0.3);
-            border-radius: 10px;
+            border-radius: 5px;
             overflow: hidden;
-            margin-top: 20px;
         }
     </style>
     <link rel="stylesheet" href="src/styles/main.css">
 </head>
 
 <body>
-    <div id="game-container"></div>
+    <div class="game-frame">
+        <div class="title-bar">
+            <a href="../../index.html" class="home-button" title="Back to Codepet Games">
+                <img src="../../assets/images/logo.png" alt="Codepet Logo" class="paw-logo">
+            </a>
+            <div class="game-title">
+                <img src="assets/images/Meteors/meteorGrey_tiny1.png" alt="Space Clicker Logo" class="game-logo">
+                <span>Space Clicker</span>
+            </div>
+        </div>
+        <div id="game-container"></div>
+    </div>
 
     <!-- Load Phaser from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
