@@ -5,18 +5,22 @@ import { GameScene } from './scenes/GameScene';
 
 const config = {
     type: Phaser.AUTO,
-    width: 1200,
-    height: 700,
-    parent: 'game-container',
+    scale: {
+        mode: Phaser.Scale.RESIZE,
+        parent: 'game-container',
+        width: '100%',
+        height: '100%'
+    },
     pixelArt: true,
+    backgroundColor: '#2d2d2d',
+    scene: [BootScene, PreloadScene, GameScene],
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
             debug: false
         }
-    },
-    scene: [BootScene, PreloadScene, GameScene]
+    }
 };
 
 window.addEventListener('DOMContentLoaded', () => {
