@@ -13,10 +13,15 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #2a1a0a;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
 .container {
@@ -25,74 +30,102 @@ body {
     padding: 2rem;
 }
 
-header {
+.header {
     text-align: center;
-    margin-bottom: 3rem;
+    padding: 1rem;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
-header h1 {
-    font-size: 3rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.paw-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #ffa726;
+}
+
+.header p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #ffffff;
+}
+
+.games-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
-    margin-bottom: 3rem;
+    padding: 2rem;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .game-card {
-    background-color: var(--card-background);
+    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    overflow: hidden;
+    padding: 1.5rem;
+    width: 28%;
+    min-width: 250px;
+    text-align: center;
     transition: transform 0.3s ease;
+    cursor: pointer;
     text-decoration: none;
-    color: var(--text-color);
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .game-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 167, 38, 0.3);
 }
 
-.game-preview {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-}
-
-.game-preview img {
+.game-card img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 180px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
 }
 
-.game-info {
-    padding: 1.5rem;
+.game-card h2 {
+    margin: 0;
+    color: #ffa726;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.game-info h2 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
+.game-card p {
+    margin: 1rem 0;
+    color: #ffffff;
 }
 
 .coming-soon {
-    opacity: 0.7;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
-.coming-soon-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    color: var(--primary-color);
+.coming-soon:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 footer {
@@ -110,7 +143,7 @@ footer {
         font-size: 2rem;
     }
     
-    .games-grid {
-        grid-template-columns: 1fr;
+    .games-container {
+        flex-direction: column;
     }
 } 
