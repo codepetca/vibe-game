@@ -1,0 +1,24 @@
+{
+  "name": "codepet-games",
+  "version": "1.0.0",
+  "description": "A collection of fun, engaging browser games built with Phaser 3",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server ./public -p 8080",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "games",
+    "phaser",
+    "html5",
+    "javascript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "phaser": "^3.60.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
