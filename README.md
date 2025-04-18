@@ -1,4 +1,4 @@
-# Vibe Games
+# CodePet Games
 
 A collection of fun, engaging browser games built with Phaser 3.
 
@@ -9,26 +9,54 @@ A collection of fun, engaging browser games built with Phaser 3.
 - Upgrade your click power and automate collection
 - Features a clean, modern UI with smooth animations
 
+### Asteroids
+- Classic arcade-style game where you control a spaceship and destroy asteroids
+- Avoid collisions and shoot lasers to break down space rocks
+- Features smooth controls and progressively challenging gameplay
+
+### Roguelike
+- Dungeon exploration game with procedurally generated levels
+- Battle enemies, collect power-ups, and find your way through the maze
+- Pixel art style with top-down perspective
+
 ## Project Structure
 
 ```
-vibe-game/
+codepet-games/
 ├── public/                    # Static files for the main website
 │   ├── index.html            # Main landing page
 │   ├── styles/               # Global styles
-│   └── assets/               # Shared assets
-│
-├── games/                    # Individual game directories
-│   ├── space-clicker/       # Space Clicker game
-│   │   ├── src/
-│   │   │   ├── js/
-│   │   │   │   ├── scenes/
-│   │   │   │   └── game.js
-│   │   │   └── styles/
-│   │   ├── assets/
-│   │   └── index.html
+│   ├── assets/               # Shared assets
+│   │   └── images/           # Common images
+│   │       └── logo.png      # Site logo
 │   │
-│   └── [future-game]/       # Template for future games
+│   └── games/                # Individual game directories
+│       ├── space-clicker/    # Space Clicker game
+│       │   ├── index.html
+│       │   ├── src/
+│       │   │   ├── js/
+│       │   │   │   ├── scenes/
+│       │   │   │   └── game.js
+│       │   │   └── styles/
+│       │   │       └── main.css
+│       │   └── assets/
+│       │
+│       ├── asteroids/        # Asteroids game
+│       │   ├── index.html
+│       │   ├── src/
+│       │   │   ├── js/
+│       │   │   │   ├── scenes/
+│       │   │   │   └── game.js
+│       │   │   └── styles/
+│       │   └── assets/
+│       │
+│       └── roguelike/        # Roguelike game
+│           ├── index.html
+│           ├── src/
+│           │   └── js/
+│           │       ├── scenes/
+│           │       └── game.js
+│           └── assets/
 │
 └── README.md                 # Project documentation
 ```
@@ -37,8 +65,8 @@ vibe-game/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/vibe-game.git
-cd vibe-game
+git clone https://github.com/yourusername/codepet-games.git
+cd codepet-games
 ```
 
 2. Open the project in your browser:
