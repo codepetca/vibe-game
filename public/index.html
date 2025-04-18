@@ -4,44 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vibe Games</title>
+    <title>Codepet Games</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <h1>Vibe Games</h1>
-            <p>A collection of fun, engaging browser games</p>
-        </header>
+    <div class="header">
+        <div class="header-content">
+            <img src="../assets/images/logo.png" alt="Codepet Logo" class="paw-logo">
+            <h1>Codepet Games</h1>
+        </div>
+        <p>A collection of fun and simple games</p>
+    </div>
 
-        <main class="games-grid">
-            <a href="../games/space-clicker/index.html" class="game-card">
-                <div class="game-preview">
-                    <img src="../games/space-clicker/assets/images/preview.png" alt="Space Clicker Preview">
-                </div>
-                <div class="game-info">
-                    <h2>Space Clicker</h2>
-                    <p>Collect resources, upgrade your click power, and automate collection in this space-themed clicker
-                        game!</p>
-                </div>
-            </a>
-
-            <!-- Future games will be added here -->
-            <div class="game-card coming-soon">
-                <div class="game-preview">
-                    <div class="coming-soon-overlay">Coming Soon</div>
-                </div>
-                <div class="game-info">
-                    <h2>More Games Coming Soon!</h2>
-                    <p>Stay tuned for more exciting games in development.</p>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            <p>Created with ❤️ by Vibe Games</p>
-        </footer>
+    <div class="games-container">
+        <a href="games/asteroids/public/index.html" class="game-card">
+            <img src="games/asteroids/assets/images/Ships/playerShip1_blue.png" alt="Asteroids">
+            <h2>Asteroids</h2>
+            <p>Explore space, destroy asteroids, and upgrade your ship!</p>
+        </a>
+        <a href="games/space-clicker/index.html" class="game-card">
+            <img src="games/space-clicker/assets/images/Meteors/meteorGrey_big2.png" alt="Space Clicker">
+            <h2>Space Clicker</h2>
+            <p>Build a Space Station!</p>
+        </a>
+        <a href="#" class="game-card coming-soon">
+            <h2>Roguelike</h2>
+            <p>Explore dungeons, battle monsters, and collect treasure in this classic roguelike adventure!</p>
+        </a>
     </div>
 </body>
 

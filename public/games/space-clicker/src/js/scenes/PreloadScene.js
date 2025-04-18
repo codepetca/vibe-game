@@ -67,8 +67,8 @@ class PreloadScene extends Phaser.Scene {
             gradient.destroy();
         });
 
-        // Load game assets with absolute paths
-        const basePath = '/games/space-clicker/assets/';
+        // Load game assets with relative paths
+        const basePath = 'assets/';
 
         // Load background
         console.log('Loading background...');
@@ -97,4 +97,4 @@ class PreloadScene extends Phaser.Scene {
         console.log('PreloadScene create called');
         this.scene.start('GameScene');
     }
-} 
+}
