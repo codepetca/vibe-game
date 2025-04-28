@@ -11,11 +11,8 @@ class GameScene extends Phaser.Scene {
             .setOrigin(0, 0)
             .setDisplaySize(1200, 700);
 
-        // Create the player ship
-        this.ship = this.add.image(600, 350, 'ship');
-        this.ship.setScale(0.5);
-        this.physics.add.existing(this.ship);
-        this.ship.body.setCollideWorldBounds(true);
+        // Create player using our new Player class
+        this.player = new Player(this, 600, 350);
 
         // Create asteroids group
         this.asteroids = this.add.group();
@@ -24,13 +21,6 @@ class GameScene extends Phaser.Scene {
         for (let i = 0; i < 3; i++) {
             this.createAsteroid();
         }
-
-        // Create bullets group
-        this.bullets = this.add.group();
-
-        // Set up controls
-        this.cursors = this.input.keyboard.createCursorKeys();
-        this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // Add debug text
         this.debugText = this.add.text(10, 10, '', {
@@ -72,67 +62,39 @@ class GameScene extends Phaser.Scene {
     }
 
     update() {
+        // Update the player
+        this.player.update();
+
         // Update debug text
         this.debugText.setText([
-            'Asteroids: ' + this.asteroids.getLength()
+            'Asteroids: ' + this.asteroids.getLength(),
+            'Score: ' + this.player.getScore()
         ]);
 
-        // Handle ship movement
-        if (this.cursors.left.isDown) {
-            this.ship.rotation -= 0.05;
-        } else if (this.cursors.right.isDown) {
-            this.ship.rotation += 0.05;
-        }
-
-        if (this.cursors.up.isDown) {
-            const angle = this.ship.rotation - Math.PI / 2;
-            this.ship.body.setVelocity(
-                Math.cos(angle) * 200,
-                Math.sin(angle) * 200
-            );
-        } else {
-            this.ship.body.setVelocity(0, 0);
-        }
-
-        // Handle shooting
-        if (Phaser.Input.Keyboard.JustDown(this.spacebar)) {
-            const angle = this.ship.rotation - Math.PI / 2;
-            const bullet = this.add.image(
-                this.ship.x + Math.cos(angle) * 20,
-                this.ship.y + Math.sin(angle) * 20,
-                'bullet'
-            );
-            bullet.setScale(0.5);
-            bullet.setRotation(angle + Math.PI / 2);
-            this.physics.add.existing(bullet);
-            bullet.body.setVelocity(
-                Math.cos(angle) * 400,
-                Math.sin(angle) * 400
-            );
-            this.bullets.add(bullet);
-        }
-
         // Check for bullet-asteroid collisions
-        this.physics.overlap(this.bullets, this.asteroids, (bullet, asteroid) => {
+        this.physics.overlap(this.player.getBullets(), this.asteroids, (bullet, asteroid) => {
             // Create explosion at asteroid position
             this.createExplosion(asteroid.x, asteroid.y);
 
             // Remove the bullet and asteroid
             bullet.destroy();
             asteroid.destroy();
+
+            // Add score for asteroid hit
+            this.player.addScore(100);
+
             console.log('Asteroid destroyed by bullet at', asteroid.x, asteroid.y, 'Total:', this.asteroids.getLength());
         });
 
-        // Clean up off-screen objects
-        const bulletsToRemove = [];
-        const asteroidsToRemove = [];
-
-        // Find bullets to remove
-        this.bullets.getChildren().forEach(bullet => {
-            if (bullet.x < 0 || bullet.x > 1200 || bullet.y < 0 || bullet.y > 700) {
-                bulletsToRemove.push(bullet);
-            }
+        // Check for player-asteroid collisions
+        this.physics.overlap(this.player.getShipSprite(), this.asteroids, () => {
+            // Handle player collision with asteroid
+            this.player.hit();
+            console.log('Player hit by asteroid');
         });
+
+        // Clean up off-screen asteroids
+        const asteroidsToRemove = [];
 
         // Find asteroids to remove
         this.asteroids.getChildren().forEach(asteroid => {
@@ -142,15 +104,10 @@ class GameScene extends Phaser.Scene {
             }
         });
 
-        // Remove bullets
-        bulletsToRemove.forEach(bullet => {
-            bullet.destroy();
-        });
-
         // Remove asteroids
         asteroidsToRemove.forEach(asteroid => {
             asteroid.destroy();
             console.log('Asteroid removed at', asteroid.x, asteroid.y, 'Total:', this.asteroids.getLength());
         });
     }
-} 
+}
