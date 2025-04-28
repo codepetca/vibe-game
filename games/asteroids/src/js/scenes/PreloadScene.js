@@ -19,8 +19,27 @@ class PreloadScene extends Phaser.Scene {
         // Load background
         this.load.image('background', 'assets/images/Backgrounds/black.png');
 
-        // Load ship
+        // Load ships - keep 'ship' for backward compatibility
         this.load.image('ship', 'assets/images/Ships/playerShip3_blue.png');
+
+        // Load all ship types
+        // Ship type 1
+        this.load.image('playerShip1_blue', 'assets/images/Ships/playerShip1_blue.png');
+        this.load.image('playerShip1_green', 'assets/images/Ships/playerShip1_green.png');
+        this.load.image('playerShip1_orange', 'assets/images/Ships/playerShip1_orange.png');
+        this.load.image('playerShip1_red', 'assets/images/Ships/playerShip1_red.png');
+
+        // Ship type 2
+        this.load.image('playerShip2_blue', 'assets/images/Ships/playerShip2_blue.png');
+        this.load.image('playerShip2_green', 'assets/images/Ships/playerShip2_green.png');
+        this.load.image('playerShip2_orange', 'assets/images/Ships/playerShip2_orange.png');
+        this.load.image('playerShip2_red', 'assets/images/Ships/playerShip2_red.png');
+
+        // Ship type 3
+        this.load.image('playerShip3_blue', 'assets/images/Ships/playerShip3_blue.png');
+        this.load.image('playerShip3_green', 'assets/images/Ships/playerShip3_green.png');
+        this.load.image('playerShip3_orange', 'assets/images/Ships/playerShip3_orange.png');
+        this.load.image('playerShip3_red', 'assets/images/Ships/playerShip3_red.png');
 
         // Load asteroids
         this.load.image('asteroid_large', 'assets/images/Meteors/meteorGrey_big1.png');
